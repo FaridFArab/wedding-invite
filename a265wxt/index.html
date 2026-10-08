@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوت‌نامه مراسم نامزدی</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 480px; /* مناسب برای ویدیوهای عمودی گوشی/استوری */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    video {
+      width: 100%;
+      display: block;
+    }
+    /* لایه ورودی برای تضمین فعال‌شدن صدا با لمس اول */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .play-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .play-btn svg { width: 32px; height: 32px; fill: #0f172a; margin-right: -4px; }
+  </style>
+</head>
+<body>
+
+<div class="video-container">
+  <video id="invitationVideo" playsinline preload="metadata">
+    <!-- لینک مستقیم ویدیوی آپلود شده در آبجکت استوریج -->
+    <source src="https://invitationcard.s3.ir-central1.arvanstorage.ir/IMG_4304.MOV" type="video/mp4">
+    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+  </video>
+
+  <div class="overlay" id="startOverlay" onclick="playWithSound()">
+    <div class="play-btn">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <span style="font-size: 16px; font-weight: bold;">برای باز کردن کارت دعوت لمس کنید</span>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('invitationVideo');
+  const overlay = document.getElementById('startOverlay');
+
+  function playWithSound() {
+    video.muted = false;
+    video.play();
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 300);
+  }
+</script>
+
+</body>
+</html>
